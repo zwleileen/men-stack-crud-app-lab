@@ -38,6 +38,12 @@ app.get("/quotes/new", async (req, res) => {
 
 app.post("/quotes", async (req, res) => {
   await Quote.create(req.body);
+  res.send("created");
+});
+
+app.get("/quotes/:quoteId", async (req, res) => {
+  const foundQuote = await Quote.findById(req.params.quoteId);
+  res.send("yes");
 });
 
 //listen goes here
