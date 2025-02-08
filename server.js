@@ -24,7 +24,20 @@ app.use(express.urlencoded({ extended: false }));
 
 //routes go here
 app.get("/", async (req, res) => {
-  res.send("hello hello");
+  res.render("index.ejs");
+});
+
+app.get("/quotes", async (req, res) => {
+  const allQuotes = await Quote.find();
+  res.render("quotes/index.ejs", { quotes: allQuotes });
+});
+
+app.get("/quotes/new", async (req, res) => {
+  res.render("quotes/new.ejs");
+});
+
+app.post("/quotes", async (req, res) => {
+  await Quote.create(req.body);
 });
 
 //listen goes here
