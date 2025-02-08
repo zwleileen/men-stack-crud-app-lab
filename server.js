@@ -40,7 +40,7 @@ app.get("/quotes/new", async (req, res) => {
 
 app.post("/quotes", async (req, res) => {
   await Quote.create(req.body);
-  res.send("created");
+  res.redirect("/quotes");
 });
 
 app.get("/quotes/:quoteId", async (req, res) => {
@@ -55,7 +55,12 @@ app.get("/quotes/:quoteId/edit", async (req, res) => {
 
 app.put("/quotes/:quoteId", async (req, res) => {
   await Quote.findByIdAndUpdate(req.params.quoteId, req.body);
-  res.send("updated");
+  res.redirect(`/quotes/${req.params.quoteId}`);
+});
+
+app.delete("/quotes/:quoteId", async (req, res) => {
+  await Quote.findByIdAndDelete(req.params.quoteId);
+  res.redirect("/quotes");
 });
 
 //listen goes here

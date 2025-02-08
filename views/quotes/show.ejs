@@ -8,6 +8,9 @@
   <body>
     <h1><%= quote.author %></h1>
     <p><%= quote.content %></p>
+    <form action="/quotes/<%=quote._id%>?_method=DELETE" method="POST">
+        <button type="submit">Delete Quote</button>
+    </form>
     <a href="/quotes/<%= quote._id %>/edit">Edit Quote</a>
     <a href="/quotes">Browse Quotes</a> 
     <a href="/">Home Page</a> 
