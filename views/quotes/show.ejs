@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= quote.author %></title>
+  </head>
+  <body>
+    <h1><%= quote.author %></h1>
+    <p><%= quote.content %></p>
+    <a href="/quotes/<%= quote._id %>/edit">Edit Quote</a>
+    <a href="/quotes">Browse Quotes</a> 
+    <a href="/">Home Page</a> 
+  </body>
+</html>

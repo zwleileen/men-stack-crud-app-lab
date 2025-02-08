@@ -10,7 +10,7 @@
     <ul>
         <% quotes.forEach(quote => { %>
             <li>
-                <%= quote.author %>
+                <a href="/quotes/<%= quote._id %>"><%= quote.author %></a>
             </li>
         <% }); %>
     </ul>

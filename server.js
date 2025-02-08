@@ -5,6 +5,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const Quote = require("./models/Quote.js");
+const methodOverride = require("method-override"); // new
 
 //configs go here
 const app = express();
@@ -20,6 +21,7 @@ mongoose.connection.on("connected", () => {
 //middleware goes here
 app.use(morgan("dev"));
 //For ejs only:
+app.use(methodOverride("_method")); // new
 app.use(express.urlencoded({ extended: false }));
 
 //routes go here
@@ -43,7 +45,17 @@ app.post("/quotes", async (req, res) => {
 
 app.get("/quotes/:quoteId", async (req, res) => {
   const foundQuote = await Quote.findById(req.params.quoteId);
-  res.send("yes");
+  res.render("quotes/show.ejs", { quote: foundQuote });
+});
+
+app.get("/quotes/:quoteId/edit", async (req, res) => {
+  const foundQuote = await Quote.findById(req.params.quoteId);
+  res.render("quotes/edit.ejs", { quote: foundQuote });
+});
+
+app.put("/quotes/:quoteId", async (req, res) => {
+  await Quote.findByIdAndUpdate(req.params.quoteId, req.body);
+  res.send("updated");
 });
 
 //listen goes here
